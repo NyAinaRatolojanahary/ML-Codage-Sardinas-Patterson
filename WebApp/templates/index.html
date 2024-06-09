@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <title>Prédiction de Langage</title>
+    <style>
+      #result-container {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" width="50px">
+        <div class="card-body">
+            <div class="mb-3">
+            <h1>Entrez votre langage</h1>
+            <form action="/" method="post">
+                <div class="form-group">
+                    <label for="langage">Langage (séparé par des virgules) :</label>
+                    <input type="text" class="form-control" id="langage" name="langage" required>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Predire</button>
+                </div>
+            </form>
+        </div>
+        </div>
+        <div class="card-body">
+        <div id="result-container" class="mb-3" style="display:none">
+            <h2>Résultat de la Prédiction</h2>
+            <p>Langage : {{ langages_input }}</p>
+            <p>Prédiction : </p><div class="{{color}}"><h1>{{ prediction }}</h1></div>
+            <p>Probabilite False : {{ false_percentage}} %</p>
+            <p>Probabilite True : {{ true_percentage}} %</p>
+            <p>Algorithme de Sardinas et Paterson: {{ resultat_sardinas_paterson }}</p>
+        </div>
+        </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        {% if prediction is not none %}
+          document.getElementById("result-container").style.display = "block";
+        {% endif %}
+      });
+    </script>
+  </body>
+</html>
